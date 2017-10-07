@@ -535,6 +535,7 @@ the underground, and I hope everyone loves my work.
 
    1. The Boot Sector by Ralph                            http://blacksun.box.sk
                                                           http://awc.rejects.net
+                                       http://web.textfiles.com/hacking/boot.txt
    2. Writing Boot Sector Code by Susam Pal
                                       http://susam.in/articles/boot-sector-code/
 

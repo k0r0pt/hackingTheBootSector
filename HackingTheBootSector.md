@@ -30,8 +30,9 @@ Back then, the boot sector was made with one objective in mind. That was to enab
 
 If I use the debug utility in DOS, to dump the memory address f000:fff0, it would show something like this:
 
-```-d f000:fff0
-F000:FFF0 CD 19 E0 00 F0 31 31 2F-32 36 2F 39 39 00 FC 81 .....```
+```-d f000:fff0```
+
+```F000:FFF0 CD 19 E0 00 F0 31 31 2F-32 36 2F 39 39 00 FC 81 .....```
 
 A valid boot Sector must terminate with the two bytes 0xAA55. If a valid Boot Sector is found, the code is loaded into 0000:7C00. Repeating what I said before, as it is merely 512 bytes, that the boot sector code can have, it can't do much. So you must make sure that you write small code, or just execute some other program from it, which is also done in Boot Loaders and Operating Systems.
 
@@ -77,7 +78,7 @@ And enjoy hacking. It's the only fun part of our lives!
 
 ## .o# 0x06 References #o.
 
-1. The Boot Sector by Ralph - [http://blacksun.box.sk](http://blacksun.box.sk), [http://awc.rejects.net](http://awc.rejects.net)
+1. [The Boot Sector by Ralph](http://web.textfiles.com/hacking/boot.txt)
 2. [Writing Boot Sector Code by Susam Pal](http://susam.in/articles/boot-sector-code/)
 
 ## .o# 0x07 Disclaimer #o.
