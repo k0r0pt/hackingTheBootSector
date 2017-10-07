@@ -1,5 +1,6 @@
 # Hacking the Boot Sector
-  - Sudo (sudiptosarkar@visioplanet.org)
+
+##author - Sudipto (sudiptosarkar@visioplanet.org)
 
 Okay, this seems to be the first article to the first edition of the ezine 
 k0r0pt. Like this article, all articles will be divided into sections. This 
@@ -8,21 +9,23 @@ article is about hacking the boot sector.
 
 ## Table of Contents.
 
-0x01 Introduction
-0x02 Details
-0x03 Programming
-0x04 Programs
-0x05 Outtro
-0x06 References
-0x07 Disclaimer
+* [Introduction](#introduction)
+* [Details](#details)
+* [Programming](#programming)
+* [Programs](#programs)
+* [Outtro](#outtro)
+* [References](#references)
+* [Disclaimer](#disclaimer)
 
-##.o# 0x01 Introduction #o.
+
+
+##Introduction
 
 The boot sector has always amused me, and I have always tried to know how it all worked. How the computer sprang up after power, and how it detected all those Operating Systems I had. But after a lot of going through stuffs and research, I could find out less about it, until one day, when I got a paperabout it, and only then I understood that I was not even aware what to search for. This paper [1], was about The Boot Sector, how it worked and how to controlit. Since then I have gone through a couple or so papers on the topic, and adozen programs illustrating how to use the computer after boot up. The how to use part, I was familiar with, as it consisted of BIOS interrupts, about whichI had read while learning assembly & C, and VGA and mouse programming in DOS. And after that, I did a lot of research on using the computer after booting it. This paper is theory, which I came to know about from the references I've mentioned, and my own research, which I have included below. To understand thoseprograms, you must be aware of assembly language, which if you're not, you canlearn from the Internet as there are thousands of tutorials out there.
 
 Another thing that I must tell before going any further, is that I have used two Operating Systems in this research. One is Linux, which runs on my laptop, that happens to be lacking a floppy drive, which I used to boot the other computer, which happens to be running "Microsoft Windows". Sad but true. This is also because, I didn't have a floppy drive in my laptop, otherwise I'd have done it in Linux. So, I used the command line utility Debug for MS-DOS, in order to write to boot sector of the floppy drive. This article will be doing the same. Although I have used Linux for the assembling part, you can do that in Windows as well, in case you use Windows. But in that case, you'd only use the nasm, or some other equivalent assembler for DOS/Windows, like TASM or A386. But if you're more comfortable with the GAS, I'd suggest you do it on Linux, but in which case, you'd have to do the conversion to AT&T format. Keeping in mind, that people are more familiar with the Intel assembler syntax, I'd code in the Intel syntax. Also, dd can be used on Linux to write to the boot sector. But I know little about how to use it. So, I'd leave that upto you to discover.
 
-## .o# 0x02 Details #o.
+##Details
 
 When you power on the computer, it executes the BIOS, which is located at memory location F000:FFF0. This BIOS is what we also call Basic Input Output System. This BIOS is stored in Electrically Programmable ROM Chips inside the computer. The BIOS then takes control and performs the Power On Self Test, popularly known as the POST. This actually tests for all hardwares and checks them for integrity. It checks the Video card BIOS, and executes it. It is located at memory address 0xC000. Then after checking for other ROM BIOSes, it executes the hard disk BIOS located at 0xC8000. This BIOS is what loads the Operating System.
 
@@ -38,7 +41,7 @@ A valid boot Sector must terminate with the two bytes 0xAA55. If a valid Boot Se
 
 About writing the code to a magnetic disk, you could simply insert a floppy inside your Windows box, and type w 100 0 0 1 inside DEBUG. This will write the code at 100th location of device 0, which is also the floppy drive A:, from sector 0 to 1.
 
- ## .o# 0x03 Programming #o.
+##Programming
 
 About the programming part, you could use just the raw code to do the job. No need to link the assembled code, as you're not using it on any OS. You'd be executing it before executing anything else. So, you'd just begin writing, and start doing what you want to do.
 
@@ -62,7 +65,7 @@ The last program is a classic boot loader, or a bootstrap utility, which explain
 
 This program is simply printing a long string, which easily crosses the 512 bytes limit, because the string itself is above 600 bytes in length. In fact the program is 1004 bytes, after it is assembled. We'd write this program to the 4th sector of the floppy by using w 100 0 4 2 in the DEBUG program. Again, this is because the floppy drive is drive 0, writing starts at sector number 4, and continues upto 2 consecutive sectors, which provide a space of 1024 bytes, where our program snuggles comfortably. As the rest of the code needs no explanation, we'd directly go on to understand the Print logo part. Here everything is the same as in program 1. But the part which is confusing is why did I add `0x0202` to `bp`. Well I did it because I noticed that without it, the msg started somewhere well before the actual string, and printed gibberish before printing the string. Turned out, that was `0x0202` characters before the actual string.
 
-## .o# 0x04 Programs #o.
+##Programs
 
 * [bs1.asm](src/bs1.asm)
 * [gfx1.asm](src/gfx1.asm)
@@ -70,18 +73,18 @@ This program is simply printing a long string, which easily crosses the 512 byte
 * [bsx.asm](src/bsx.asm)
 * [ldprogram.asm](src/ldprogram.asm)
 
-## .o# 0x05 Outtro #o.
+##Outtro
 
 Well, it seems that my article has come to an end after all. Before I say goodbye, I'd like to let all my readers know, that this was my first article to the underground, and I hope everyone loves my work.
 
 And enjoy hacking. It's the only fun part of our lives!
 
-## .o# 0x06 References #o.
+##References
 
 1. [The Boot Sector by Ralph](http://web.textfiles.com/hacking/boot.txt)
 2. [Writing Boot Sector Code by Susam Pal](http://susam.in/articles/boot-sector-code/)
 
-## .o# 0x07 Disclaimer #o.
+##Disclaimer
 
 
 The information contained within this file is purely for educational and informational purposes. If this text is used for illicit purposes or causes any type of damages and/or harm in any direct and/or indirect manner, neither the author nor the k0r0pt staff can be held responsible.
