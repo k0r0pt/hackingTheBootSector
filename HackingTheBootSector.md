@@ -2,9 +2,7 @@
 
 `author` - **Sudipto** (*sudiptosarkar@visioplanet.org*)
 
-Okay, this seems to be the first article to the first edition of the ezine 
-k0r0pt. Like this article, all articles will be divided into sections. This 
-article is about hacking the boot sector.
+This article (evidently) is about hacking the boot sector. More than that, it encompasses the author's research into how it works.
 
 
 ## Table of Contents.
